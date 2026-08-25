@@ -39,9 +39,17 @@ async function fetchCtaMode(): Promise<CtaMode> {
         const res = await fetch(apiUrl, { cache: "no-store" });
         if (!res.ok) return DEFAULT_CTA_MODE;
 
-        const data = await res.json().catch(() => null);
-        // Tolerate either `{ value: "telegram" }` or a bare `"telegram"` string response.
-        const value = typeof data === "string" ? data : data?.value;
+        const raw = (await res.text()).trim();
+
+        // The API may reply with a JSON object (`{ "value": "telegram" }`),
+        // a JSON string (`"telegram"`), or plain text (`telegram`) — handle all three.
+        let value: unknown = raw;
+        try {
+            const parsed = JSON.parse(raw);
+            value = typeof parsed === "string" ? parsed : parsed?.value;
+        } catch {
+            // Not JSON — the raw text itself is the mode value.
+        }
 
         return value === "telegram" ? "telegram" : "account";
     } catch {
