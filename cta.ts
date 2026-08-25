@@ -33,12 +33,10 @@ function toCta(mode: CtaMode): Cta {
 async function fetchCtaMode(): Promise<CtaMode> {
     const apiUrl = process.env.SETTINGS_API_URL;    
     
-    console.log("apiUrl", apiUrl);
-    
     if (!apiUrl) return DEFAULT_CTA_MODE;
 
     try {
-        const res = await fetch(apiUrl, { next: { revalidate: 60 } });
+        const res = await fetch(apiUrl, { cache: "no-store" });
         if (!res.ok) return DEFAULT_CTA_MODE;
 
         const data = await res.json().catch(() => null);
