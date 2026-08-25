@@ -31,7 +31,10 @@ function toCta(mode: CtaMode): Cta {
 
 /** Server-only — reads the live platform setting from the main API. Falls back to NEXT_PUBLIC_CTA_MODE (or "account") if the API is unreachable or SETTINGS_API_URL isn't configured. */
 async function fetchCtaMode(): Promise<CtaMode> {
-    const apiUrl = process.env.SETTINGS_API_URL;
+    const apiUrl = process.env.SETTINGS_API_URL;    
+    
+    console.log("apiUrl", apiUrl);
+    
     if (!apiUrl) return DEFAULT_CTA_MODE;
 
     try {
