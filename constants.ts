@@ -27,6 +27,7 @@ const SPECIALIST_ITEMS = [
             radial-gradient(80% 70% at 70% 100%, rgba(108,92,231,0.3), transparent 70%),
             linear-gradient(170deg, #1a1a1a, #0a0a0a)
         `,
+        photoUrl: '/catalog/alina.png',
     },
     {
         name: 'Виктория',
@@ -36,6 +37,7 @@ const SPECIALIST_ITEMS = [
             radial-gradient(80% 70% at 25% 100%, #4834B0, transparent 70%),
             linear-gradient(170deg, #1c1c1f, #0a0a0a)
         `,
+        photoUrl: '/catalog/victoria.png',
     },
     {
         name: 'Мария',
@@ -45,6 +47,7 @@ const SPECIALIST_ITEMS = [
             radial-gradient(80% 70% at 75% 100%, rgba(108,92,231,0.4), transparent 70%),
             linear-gradient(170deg, #1a1a1a, #0a0a0a)
         `,
+        photoUrl: '/catalog/maria.png',
     },
     {
         name: 'Дарья',
@@ -54,6 +57,7 @@ const SPECIALIST_ITEMS = [
             radial-gradient(80% 70% at 30% 100%, #A29BFE, transparent 65%),
             linear-gradient(170deg, #1c1c1f, #0a0a0a)
         `,
+        photoUrl: '/catalog/daria.png',
     },
 ];
 

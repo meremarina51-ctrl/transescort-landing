@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Image from "next/image";
 import { SPECIALIST_ITEMS } from "@/constants";
 import { CtaGroup } from "./CtaGroup";
 
@@ -13,9 +14,15 @@ export const Specialists: FC = () => (
             </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {SPECIALIST_ITEMS.map(({ name, meta, photoStyle }) => (
+                {SPECIALIST_ITEMS.map(({ name, meta, photoUrl }) => (
                     <div key={name} className="card overflow-hidden">
-                        <div className="aspect-[3/4] w-full" style={{ background: photoStyle }} />
+                        <Image 
+                            className="aspect-[3/4] w-full object-cover"
+                            alt={name}
+                            src={photoUrl}
+                            width={325}
+                            height={410}
+                        />
                         <div className="p-4">
                             <h3 className="font-display text-[15px] font-bold">{name}</h3>
                             <p className="mt-1.5 font-body text-xs text-white/40">{meta}</p>
