@@ -20,7 +20,7 @@ const DEFAULT_CTA_MODE: CtaMode = process.env.NEXT_PUBLIC_CTA_MODE === "telegram
 
 function toCta(mode: CtaMode): Cta {
     if (mode === "telegram") {
-        return { primary: { label: "Связаться с нами в Telegram", href: CTA_LINKS.telegram }, secondary: null };
+        return { primary: { label: "Связаться с нами", href: CTA_LINKS.telegram }, secondary: null };
     }
 
     return {
