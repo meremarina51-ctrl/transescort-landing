@@ -32,7 +32,7 @@ export const Specialists: FC = () => (
             </div>
 
             <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
-                <CtaGroup />
+                <CtaGroup placement="specialists" />
             </div>
         </div>
     </section>

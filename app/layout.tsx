@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { YANDEX_METRIKA_ID } from "@/metrika";
 import "./globals.css";
-
-const YANDEX_METRIKA_ID = 112110643;
 
 export const metadata: Metadata = {
   title: "Каталог массажных специалистов",

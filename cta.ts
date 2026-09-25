@@ -12,6 +12,7 @@ interface CtaLink {
 }
 
 interface Cta {
+    mode: CtaMode;
     primary: CtaLink;
     secondary: CtaLink | null;
 }
@@ -20,10 +21,11 @@ const DEFAULT_CTA_MODE: CtaMode = process.env.NEXT_PUBLIC_CTA_MODE === "telegram
 
 function toCta(mode: CtaMode): Cta {
     if (mode === "telegram") {
-        return { primary: { label: "Связаться с нами", href: CTA_LINKS.telegram }, secondary: null };
+        return { mode, primary: { label: "Связаться с нами", href: CTA_LINKS.telegram }, secondary: null };
     }
 
     return {
+        mode,
         primary: { label: "Создать аккаунт", href: CTA_LINKS.account },
         secondary: { label: "Перейти в каталог", href: CTA_LINKS.catalog },
     };

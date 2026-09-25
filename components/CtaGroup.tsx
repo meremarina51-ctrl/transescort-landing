@@ -1,17 +1,30 @@
 import { getCta } from "@/cta";
+import { TrackedCtaLink } from "./TrackedCtaLink";
 
-export const CtaGroup = async () => {
-    const { primary, secondary } = await getCta();
+interface IProps {
+    placement: string;
+}
+
+export const CtaGroup = async ({ placement }: IProps) => {
+    const { mode, primary, secondary } = await getCta();
 
     return (
         <>
-            <a href={primary.href} target="_blank" rel="noopener noreferrer" className="btn-primary w-full sm:w-auto">
-                {primary.label}
-            </a>
+            <TrackedCtaLink
+                href={primary.href}
+                label={primary.label}
+                className="btn-primary w-full sm:w-auto"
+                goal={`cta_primary_click_${mode}`}
+                params={{ placement }}
+            />
             {secondary && (
-                <a href={secondary.href} target="_blank" rel="noopener noreferrer" className="btn-secondary w-full sm:w-auto">
-                    {secondary.label}
-                </a>
+                <TrackedCtaLink
+                    href={secondary.href}
+                    label={secondary.label}
+                    className="btn-secondary w-full sm:w-auto"
+                    goal={`cta_secondary_click_${mode}`}
+                    params={{ placement }}
+                />
             )}
         </>
     );

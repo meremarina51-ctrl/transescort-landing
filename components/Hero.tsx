@@ -34,7 +34,7 @@ export const Hero: FC = () => (
                     <span>Приватность</span>
                 </div>
                 <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-                    <CtaGroup />
+                    <CtaGroup placement="hero" />
                 </div>
             </div>
         </div>
