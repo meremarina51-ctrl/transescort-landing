@@ -4,6 +4,9 @@ export const YANDEX_METRIKA_ID = 112110643;
 export function reachGoal(goal: string, params?: Record<string, unknown>) {
   if (typeof window === "undefined") return;
   try {
-    (window as any).ym?.(YANDEX_METRIKA_ID, "reachGoal", goal, params);
+    const analyticsWindow = window as Window & {
+      ym?: (counterId: number, action: "reachGoal", goal: string, params?: Record<string, unknown>) => void;
+    };
+    analyticsWindow.ym?.(YANDEX_METRIKA_ID, "reachGoal", goal, params);
   } catch {}
 }

@@ -1,3 +1,6 @@
+import { cache } from "react";
+import type { Dictionary } from "@/i18n/dictionaries";
+
 export type CtaMode = "account" | "telegram";
 
 export const CTA_LINKS = {
@@ -19,15 +22,15 @@ interface Cta {
 
 const DEFAULT_CTA_MODE: CtaMode = process.env.NEXT_PUBLIC_CTA_MODE === "telegram" ? "telegram" : "account";
 
-function toCta(mode: CtaMode): Cta {
+function toCta(mode: CtaMode, labels: Dictionary["cta"]): Cta {
     if (mode === "telegram") {
-        return { mode, primary: { label: "Связаться с нами", href: CTA_LINKS.telegram }, secondary: null };
+        return { mode, primary: { label: labels.contact, href: CTA_LINKS.telegram }, secondary: null };
     }
 
     return {
         mode,
-        primary: { label: "Создать аккаунт", href: CTA_LINKS.account },
-        secondary: { label: "Перейти в каталог", href: CTA_LINKS.catalog },
+        primary: { label: labels.createAccount, href: CTA_LINKS.account },
+        secondary: { label: labels.openCatalog, href: CTA_LINKS.catalog },
     };
 }
 
@@ -59,7 +62,9 @@ async function fetchCtaMode(): Promise<CtaMode> {
     }
 }
 
-export async function getCta(): Promise<Cta> {
-    const mode = await fetchCtaMode();
-    return toCta(mode);
+const getCtaMode = cache(fetchCtaMode);
+
+export async function getCta(labels: Dictionary["cta"]): Promise<Cta> {
+    const mode = await getCtaMode();
+    return toCta(mode, labels);
 }

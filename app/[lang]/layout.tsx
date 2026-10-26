@@ -1,21 +1,29 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { notFound } from "next/navigation";
+import { hasLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 import { YANDEX_METRIKA_ID } from "@/metrika";
-import "./globals.css";
+import "../globals.css";
 
-export const metadata: Metadata = {
-  title: "Каталог массажных специалистов",
-  description: "Каталог уникальных массажных специалистов: проверенные профили, приватность и удобный выбор подходящего специалиста.",
-};
+export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang);
+  return dictionary.meta;
+}
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+
   return (
-    <html lang="ru">
+    <html lang={lang}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- Shared App Router root layout. */}
         <link
-          href="https://fots.googleapis.ncom/css2?family=Inter:wght@300;400;500;600;700&family=Unbounded:wght@400;500;600;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Unbounded:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
       </head>
@@ -34,6 +42,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </Script>
         <noscript>
           <div>
+            {/* The analytics pixel must remain a native image inside noscript. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`https://mc.yandex.ru/watch/${YANDEX_METRIKA_ID}`}
               style={{ position: "absolute", left: "-9999px" }}

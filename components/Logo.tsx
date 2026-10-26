@@ -1,8 +1,9 @@
 interface IProps {
   className?: string;
+  label: string;
 }
 
-export default function Logo({ className = '' }: IProps) {
+export default function Logo({ className = '', label }: IProps) {
   return (
     <svg
       width="28"
@@ -10,7 +11,8 @@ export default function Logo({ className = '' }: IProps) {
       viewBox="0 0 28 28"
       fill="none"
       className={className}
-      aria-label="Логотип"
+      role="img"
+      aria-label={label}
     >
       <defs>
         <linearGradient id="logoMarkGrad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">

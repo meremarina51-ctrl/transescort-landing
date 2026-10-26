@@ -1,12 +1,14 @@
 import { getCta } from "@/cta";
+import type { Dictionary } from "@/i18n/dictionaries";
 import { TrackedCtaLink } from "./TrackedCtaLink";
 
 interface IProps {
     placement: string;
+    labels: Dictionary["cta"];
 }
 
-export const CtaGroup = async ({ placement }: IProps) => {
-    const { mode, primary, secondary } = await getCta();
+export const CtaGroup = async ({ placement, labels }: IProps) => {
+    const { mode, primary, secondary } = await getCta(labels);
 
     return (
         <>

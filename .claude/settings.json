@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"app/[lang]\" i18n/dictionaries)",
+      "Bash(git mv *)"
+    ]
+  }
+}
